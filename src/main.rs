@@ -1,14 +1,10 @@
-use tbot::contexts::methods::ChatMethods;
+use word_games_bot::commands;
 
 #[tokio::main]
 async fn main() {
   let mut bot = tbot::Bot::from_env("BOT_TOKEN").event_loop();
-  bot.text(|context| async move {
-    let send_result = context.send_message("Hi, I am the word games bot!").call().await;
-    if let Err(err) = send_result {
-      dbg!(err);
-    }
-  });
+  bot.start(commands::start::handler);
 
+  bot.fetch_username().await.unwrap();
   bot.polling().start().await.unwrap(); 
 }
