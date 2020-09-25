@@ -1,2 +1,3 @@
 pub mod commands;
-pub mod messages;
+pub mod models;
+pub mod strings;
